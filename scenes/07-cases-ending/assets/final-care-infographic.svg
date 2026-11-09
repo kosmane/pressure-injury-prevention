@@ -1,0 +1,55 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 1080" role="img" aria-labelledby="title desc">
+  <title id="title">אומדן, שינוי תנוחה והתערבות בזמן</title>
+  <desc id="desc">אינפוגרפיקה רפואית עם שלושה סמלים: בדיקת עור, שינוי תנוחה והתערבות בטיפול.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#102f41"/>
+      <stop offset="1" stop-color="#071d2a"/>
+    </linearGradient>
+    <linearGradient id="disc" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#1e5264"/>
+      <stop offset="1" stop-color="#123648"/>
+    </linearGradient>
+    <filter id="glow" x="-40%" y="-40%" width="180%" height="180%">
+      <feGaussianBlur stdDeviation="22"/>
+    </filter>
+  </defs>
+  <rect width="1920" height="1080" fill="url(#bg)"/>
+  <circle cx="960" cy="360" r="455" fill="#2b9a99" opacity=".08" filter="url(#glow)"/>
+  <path d="M250 390H1670" fill="none" stroke="#55c5bd" stroke-width="7" stroke-linecap="round" opacity=".45"/>
+  <path d="M705 390h48m408 0h48" fill="none" stroke="#a8e8df" stroke-width="8" stroke-linecap="round"/>
+  <path d="m741 375 18 15-18 15m456-30-18 15 18 15" fill="none" stroke="#a8e8df" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <g transform="translate(420 390)">
+    <circle r="206" fill="#55c5bd" opacity=".12"/>
+    <circle r="178" fill="url(#disc)" stroke="#75d9d0" stroke-width="4"/>
+    <circle r="116" fill="none" stroke="#d7f3ef" stroke-width="6" opacity=".8"/>
+    <path d="M-90 14c27-49 55-74 91-74s64 25 90 74" fill="none" stroke="#e6f6f4" stroke-width="16" stroke-linecap="round"/>
+    <path d="M-75 48c41 31 109 31 150 0" fill="none" stroke="#8fe0d8" stroke-width="13" stroke-linecap="round"/>
+    <path d="M54-88 126-160" fill="none" stroke="#f2c96d" stroke-width="15" stroke-linecap="round"/>
+    <circle cx="143" cy="-177" r="22" fill="#f2c96d"/>
+    <path d="M-57 7h114" stroke="#f2c96d" stroke-width="10" stroke-linecap="round" opacity=".85"/>
+  </g>
+
+  <g transform="translate(960 390)">
+    <circle r="206" fill="#55c5bd" opacity=".12"/>
+    <circle r="178" fill="url(#disc)" stroke="#75d9d0" stroke-width="4"/>
+    <path d="M-111 48h222M-91 48v44m182-44v44M-120 94h240" fill="none" stroke="#e6f6f4" stroke-width="15" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M-84 5c34-44 70-66 108-66 27 0 49 9 70 28" fill="none" stroke="#8fe0d8" stroke-width="15" stroke-linecap="round"/>
+    <circle cx="-79" cy="-29" r="25" fill="#f2c96d"/>
+    <path d="M-116-102v-29m0 0-20 19m20-19 20 19M111-104v-29m0 0-20 19m20-19 20 19" fill="none" stroke="#f2c96d" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"/>
+  </g>
+
+  <g transform="translate(1500 390)">
+    <circle r="206" fill="#55c5bd" opacity=".12"/>
+    <circle r="178" fill="url(#disc)" stroke="#75d9d0" stroke-width="4"/>
+    <circle r="107" fill="none" stroke="#e6f6f4" stroke-width="15"/>
+    <path d="M0-72v75l53 32" fill="none" stroke="#f2c96d" stroke-width="15" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M91 84c-30 27-63 40-101 40-67 0-126-44-146-105" fill="none" stroke="#8fe0d8" stroke-width="11" stroke-linecap="round"/>
+    <path d="m-145 14-15 47 49-5" fill="none" stroke="#8fe0d8" stroke-width="11" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M93-83h77m-38-38v77" stroke="#f2c96d" stroke-width="15" stroke-linecap="round"/>
+  </g>
+
+  <path d="M0 760c300-46 568-30 850 10 340 49 690 52 1070-8v318H0z" fill="#051722" opacity=".44"/>
+  <path d="M0 850c365-30 681-9 960 20s610 39 960 6" fill="none" stroke="#55c5bd" stroke-width="3" opacity=".22"/>
+</svg>

@@ -1,0 +1,296 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="color-scheme" content="light">
+  <title>התאמת ניקוד ורמת סיכון – Norton</title>
+  <style>
+    :root{
+      --navy:#123648; --teal:#087b88; --teal-dark:#086575;
+      --blue-light:#e9f6f8; --page:#f3f8fa; --border:#d7e7ec;
+      --muted:#5c7685; --text:#183e50; --red:#a53b47;
+      --red-light:#fff0f1; --green:#087653; --green-light:#e8f8ed;
+    }
+    *{box-sizing:border-box}
+    body{margin:0;background:var(--page);color:var(--text);font:15px/1.45 Arial,"Segoe UI",sans-serif}
+    button{font:inherit;cursor:pointer}
+    button:focus-visible{outline:3px solid #168ba5;outline-offset:2px}
+    button:disabled{cursor:default;opacity:.55}
+    [hidden]{display:none!important}
+    .shell{max-width:650px;margin:0 auto;padding:13px 12px 22px}
+    .exercise{background:#fff;border:1px solid #e0ecef;border-radius:18px;overflow:hidden;box-shadow:0 7px 23px rgba(14,63,84,.07)}
+    .topbar{min-height:48px;padding:10px 17px;display:flex;justify-content:space-between;align-items:center;gap:12px;background:linear-gradient(112deg,#0a4658,#087786);color:#fff}
+    .topbar-name{display:flex;align-items:center;gap:9px;font-weight:800;font-size:13px}
+    .icon-med{display:inline-grid;place-items:center;border:1px solid #ffffff50;border-radius:8px;width:26px;height:26px;background:#ffffff1b;font-size:18px;flex:none}
+    .step-tag{font-size:11px;color:#d8f3f3;white-space:nowrap}
+    .body{padding:17px 19px 19px}
+    h1{font-size:clamp(19px,4.6vw,23px);line-height:1.32;color:var(--navy);margin:0 0 7px;font-weight:800}
+    .intro{margin:0 0 13px;color:var(--muted);font-size:13px}
+    .section-head{display:flex;justify-content:space-between;align-items:center;margin:0 0 9px;gap:8px}
+    .section-head h2{font-size:15px;margin:0;color:var(--navy)}
+    .counter{padding:5px 9px;border-radius:99px;background:#e7f6f8;color:#0a7482;font-weight:700;font-size:11px;white-space:nowrap}
+    .table-head,.match-row{display:grid;grid-template-columns:30px minmax(0,1fr) minmax(0,1.26fr);gap:7px;align-items:stretch}
+    .table-head{color:#4b7381;font-size:12px;font-weight:800;text-align:center;margin-bottom:6px;align-items:end}
+    .match-row{border:1px solid #e4edf0;background:#f9fcfd;border-radius:12px;padding:7px;margin-bottom:7px;min-height:86px;transition:background .15s,border-color .15s}
+    .match-row.is-wrong{background:#fff8f8;border-color:#e6a8ae}
+    .match-row.is-missing{background:#fffdf6;border-color:#e7d4a2}
+    .match-row.is-correct{background:#f1fbf5;border-color:#b7dfc9}
+    .row-number{display:grid;place-items:center;align-self:center;justify-self:center;width:25px;height:25px;background:#e5f0f3;border-radius:7px;font-weight:800;font-size:12px;color:#54798a}
+    .select-cell{position:relative;display:flex;align-items:center;justify-content:center;text-align:center;width:100%;min-width:0;min-height:70px;padding:9px 7px;border:1.5px dashed #aacbd5;border-radius:9px;background:#fff;color:var(--teal-dark);font-weight:700;font-size:13px;line-height:1.36;transition:background .15s,border-color .15s}
+    .select-cell:hover{background:#edf9fa;border-color:#2e9aab}
+    .select-cell.filled{background:#e9f7f8;border-style:solid;border-color:#add7dd;color:#194a5e;padding-left:22px}
+    .select-cell.filled::after{content:"✎";position:absolute;left:7px;bottom:5px;font-weight:400;font-size:12px;color:#417d88}
+    .select-cell .add{display:block;font-size:21px;line-height:1;margin-bottom:3px;color:#4c9dac;font-weight:400}
+    .select-cell .placeholder{font-weight:600;color:#759aa7;font-size:12px}
+    .footer-hint{font-size:11px;color:#758e99;margin:10px 0 0;line-height:1.45}
+    .feedback{min-height:42px;display:flex;align-items:center;justify-content:center;text-align:center;margin:14px 0 11px;padding:9px 12px;background:#f0f6f8;border-radius:10px;color:#4b7382;font-size:12px;font-weight:700}
+    .feedback.error{color:var(--red);background:var(--red-light)}
+    .feedback.success{color:var(--green);background:var(--green-light)}
+    .actions{display:flex;gap:9px;justify-content:center;flex-wrap:wrap}
+    .action{border:0;border-radius:10px;padding:10px 16px;min-height:43px;font-size:13px;font-weight:800}
+    .check{background:#087487;color:#fff;flex:1 1 125px}
+    .finish{background:#087653;color:#fff;flex:1 1 125px}
+    .reset{background:#fff;border:1px solid #d1e2e7;color:#557584;flex:0 1 auto}
+    .overlay{position:fixed;inset:0;z-index:1000;background:#132f3bb0;display:flex;align-items:center;justify-content:center;padding:14px;overscroll-behavior:contain}
+    .dialog{width:min(100%,400px);max-height:min(86vh,640px);display:flex;flex-direction:column;overflow:hidden;background:#fff;border-radius:18px;box-shadow:0 22px 65px #07263340}
+    .dialog-header{display:flex;justify-content:space-between;align-items:center;gap:14px;padding:18px 17px 11px;border-bottom:1px solid var(--border)}
+    .dialog h2{margin:0;font-size:18px;color:var(--navy)}
+    .dialog-sub{font-size:12px;color:var(--muted);padding:10px 17px 0;margin:0}
+    .close{border:0;background:#edf5f7;color:#406c7a;flex:none;width:33px;height:33px;border-radius:9px;font-size:22px;line-height:1}
+    .options{padding:12px 13px 15px;display:flex;flex-direction:column;gap:8px;overflow:auto;overscroll-behavior:contain}
+    .option{display:flex;justify-content:space-between;align-items:center;gap:10px;width:100%;min-height:49px;padding:11px 13px;background:#f7fbfc;color:#22495a;border:1px solid var(--border);border-radius:11px;text-align:right;font-weight:700;font-size:13px}
+    .option:hover,.option:focus-visible{background:#e7f6f8;border-color:#43a5b2}
+    .option.selected{background:#e6f8f2;border-color:#58b78b;color:#145841}
+    .option-note{font-size:10px;color:#678a98;white-space:nowrap;font-weight:400}
+    .clear-option{background:#fff;color:#6c818b;border-style:dashed}
+    .finish-dialog{padding:24px 23px;text-align:center;align-items:center}
+    .finish-symbol{background:#e2f7eb;width:60px;height:60px;display:grid;place-items:center;border-radius:50%;color:#0a7553;font-size:31px;font-weight:800}
+    .finish-dialog h2{margin:10px 0 8px;font-size:21px}
+    .finish-dialog p{font-size:13px;color:var(--muted);margin:0 0 16px}
+    .finish-actions{display:flex;width:100%;gap:9px}
+    .finish-actions .action{flex:1}
+    @media(max-width:480px){
+      body{background:#fff}
+      .shell{padding:0}
+      .exercise{border:0;box-shadow:none;border-radius:0}
+      .topbar{min-height:44px;padding:8px 13px}
+      .body{padding:13px 12px 15px}
+      h1{font-size:20px}
+      .intro{font-size:12px;margin-bottom:11px}
+      .table-head,.match-row{grid-template-columns:23px minmax(0,1fr) minmax(0,1.25fr);gap:5px}
+      .table-head{font-size:11px}
+      .match-row{padding:5px;min-height:78px}
+      .row-number{width:21px;height:22px;font-size:11px}
+      .select-cell{min-height:68px;font-size:12px;padding:7px 4px}
+      .select-cell .placeholder{font-size:11px}
+      .select-cell.filled{padding-left:15px}
+      .select-cell.filled::after{font-size:10px;left:3px;bottom:3px}
+      .overlay{align-items:flex-end;padding:0}
+      .dialog{width:100%;max-height:min(82vh,630px);border-radius:20px 20px 0 0;padding-bottom:max(0px,env(safe-area-inset-bottom))}
+      .dialog-header{padding:14px 15px 10px}
+      .options{padding:10px 12px 15px}
+      .option{min-height:47px;font-size:13px}
+    }
+    @media(prefers-reduced-motion:reduce){*{transition:none!important}}
+  </style>
+</head>
+<body>
+  <main class="shell">
+    <section class="exercise" aria-labelledby="question-title">
+      <header class="topbar">
+        <div class="topbar-name"><span class="icon-med" aria-hidden="true">+</span>לומדה סיעודית · פגיעות לחץ</div>
+        <span class="step-tag">שאלת התאמה</span>
+      </header>
+      <div class="body">
+        <h1 id="question-title">מדד Norton – ניקוד ורמת סיכון</h1>
+        <p class="intro">לחצו על כל תא בטבלה ובחרו אפשרות. בין האפשרויות מופיעים גם מסיחים.</p>
+        <div class="section-head"><h2>השלימו את שלושת הצמדים</h2><span class="counter" id="progress" aria-live="polite">0 מתוך 3</span></div>
+        <div class="table-head" aria-hidden="true"><span></span><span>ניקוד באומדן</span><span>רמת סיכון לפגיעת לחץ</span></div>
+        <div id="rows" aria-label="טבלת התאמה למדד נורטון"></div>
+        <p class="footer-hint">אפשר לשנות כל בחירה בלחיצה חוזרת. סדר השורות אינו משנה.</p>
+        <div class="feedback" id="feedback" role="status" aria-live="polite">בחרו ניקוד ורמת סיכון בכל שורה, ואז לחצו על בדיקה.</div>
+        <div class="actions">
+          <button class="action check" id="check" type="button">בדיקה ✓</button>
+          <button class="action finish" id="finish" type="button" hidden>סיום השאלה ←</button>
+          <button class="action reset" id="reset" type="button">איפוס ↻</button>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <div class="overlay" id="choice-overlay" hidden>
+    <section class="dialog" role="dialog" aria-modal="true" aria-labelledby="choice-title" aria-describedby="choice-instructions">
+      <div class="dialog-header"><h2 id="choice-title">בחרו אפשרות</h2><button type="button" class="close" id="close-choice" aria-label="סגירת חלון הבחירה">×</button></div>
+      <p class="dialog-sub" id="choice-instructions">לחצו על האפשרות המתאימה.</p>
+      <div class="options" id="options"></div>
+    </section>
+  </div>
+
+  <div class="overlay" id="completion-overlay" hidden>
+    <section class="dialog finish-dialog" role="dialog" aria-modal="true" aria-labelledby="completion-title">
+      <div class="finish-symbol" aria-hidden="true">✓</div>
+      <h2 id="completion-title">השאלה הושלמה בהצלחה!</h2>
+      <p>כל שלוש ההתאמות בין ניקוד Norton לרמת הסיכון נכונות.</p>
+      <div class="finish-actions">
+        <button class="action reset" type="button" id="replay">תרגול מחדש ↻</button>
+        <button class="action check" type="button" id="continue-course">המשך ←</button>
+      </div>
+    </section>
+  </div>
+  <noscript>כדי להפעיל את התרגול יש להפעיל JavaScript בדפדפן.</noscript>
+  <script>
+    'use strict';
+    // Risk cutoffs are transcribed from the slide supplied by the user for this teaching activity.
+    const options = {
+      score: [
+        {id:'s1', label:'נמוך מ־14'},
+        {id:'s2', label:'14–17'},
+        {id:'s3', label:'18 ומעלה'},
+        {id:'s4', label:'נמוך מ־12'},
+        {id:'s5', label:'15–18'}
+      ],
+      risk: [
+        {id:'r1', label:'סיכון גבוה מאוד לפתח פגיעת לחץ'},
+        {id:'r2', label:'סיכון בינוני לפתח פגיעת לחץ'},
+        {id:'r3', label:'סיכון נמוך לפתח פגיעת לחץ'},
+        {id:'r4', label:'סיכון גבוה לפתח פגיעת לחץ'},
+        {id:'r5', label:'אין סיכון לפתח פגיעת לחץ'}
+      ]
+    };
+    const correctPairs = {s1:'r1',s2:'r2',s3:'r3'};
+    const el = id => document.getElementById(id);
+    const byId = Object.fromEntries([...options.score,...options.risk].map(o=>[o.id,o]));
+    const state = { rows:[], result:'idle', rowResults:[], active:null, opener:null, order:{score:[],risk:[]} };
+    const shuffle = arr => {
+      const a=[...arr];
+      for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}
+      return a;
+    };
+    const escapeHTML = text => String(text).replace(/[&<>"']/g, c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+    const labelHTML = item => /^\d+[–-]\d+$/.test(item.label) ? `<bdi dir="ltr">${escapeHTML(item.label)}</bdi>` : escapeHTML(item.label);
+
+    function cellHTML(rowIndex,kind){
+      const val=state.rows[rowIndex][kind];
+      const content=val
+        ? `<span>${labelHTML(byId[val])}</span>`
+        : `<span><span class="add" aria-hidden="true">＋</span><span class="placeholder">${kind==='score'?'בחירת ניקוד':'בחירת רמת סיכון'}</span></span>`;
+      const aria=`שורה ${rowIndex+1}, ${kind==='score'?'ניקוד':'רמת סיכון'}, ${val?byId[val].label:'טרם נבחר'}. לחצו לבחירה`;
+      return `<button type="button" class="select-cell ${val?'filled':''}" data-row="${rowIndex}" data-kind="${kind}" aria-label="${escapeHTML(aria)}">${content}</button>`;
+    }
+    function render(){
+      el('rows').innerHTML=state.rows.map((row,i)=>{
+        const r=state.rowResults[i];
+        const className=state.result==='error'?(r==='wrong'?'is-wrong':r==='missing'?'is-missing':''):(state.result==='success'?'is-correct':'');
+        return `<div class="match-row ${className}"><span class="row-number" aria-hidden="true">${i+1}</span>${cellHTML(i,'score')}${cellHTML(i,'risk')}</div>`;
+      }).join('');
+      const full=state.rows.filter(r=>r.score&&r.risk).length;
+      el('progress').textContent=`${full} מתוך 3`;
+      const feedback=el('feedback');feedback.className='feedback';
+      if(state.result==='success'){
+        feedback.classList.add('success');
+        feedback.textContent='כל ההתאמות נכונות! אפשר כעת לסיים את השאלה.';
+      } else if(state.result==='error') {
+        feedback.classList.add('error');
+        const missing=state.rowResults.some(x=>x==='missing');
+        const wrong=state.rowResults.some(x=>x==='wrong');
+        feedback.textContent=missing&&wrong?'יש שורות לא מלאות ויש התאמות שגויות. תקנו ונסו שוב.':missing?'יש להשלים את כל התאים לפני סיום השאלה.':'יש התאמות שגויות. בדקו את השורות המסומנות ונסו שוב.';
+      } else {
+        feedback.textContent=full===3?'כל השורות מלאות. לחצו על בדיקה.':'בחרו ניקוד ורמת סיכון בכל שורה, ואז לחצו על בדיקה.';
+      }
+      el('finish').hidden=state.result!=='success';
+      el('check').disabled=state.result==='success';
+    }
+    function openChoice(rowIndex,kind,opener){
+      if(el('completion-overlay').hidden===false)return;
+      state.active={rowIndex,kind}; state.opener=opener;
+      el('choice-title').textContent=kind==='score'?'בחירת ניקוד באומדן':'בחירת רמת סיכון';
+      el('choice-instructions').textContent=`שורה ${rowIndex+1} · בחרו אפשרות אחת. אפשר לבחור מחדש בכל עת.`;
+      const current=state.rows[rowIndex][kind];
+      const items=state.order[kind].map(id=>{
+        const item=byId[id];
+        const otherRow=state.rows.findIndex((r,i)=>i!==rowIndex&&r[kind]===id);
+        const selected=current===id;
+        const rightNote=selected?'נבחר':otherRow!==-1?`בשימוש בשורה ${otherRow+1}`:'';
+        return `<button type="button" class="option ${selected?'selected':''}" data-option="${id}" aria-pressed="${selected}"><span>${labelHTML(item)}</span>${rightNote?`<span class="option-note">${escapeHTML(rightNote)}</span>`:''}</button>`;
+      });
+      if(current)items.push('<button type="button" class="option clear-option" data-option="">ניקוי הבחירה ×</button>');
+      el('options').innerHTML=items.join('');
+      el('choice-overlay').hidden=false;
+      document.body.style.overflow='hidden';
+      el('close-choice').focus();
+    }
+    function closeChoice(){
+      el('choice-overlay').hidden=true;
+      document.body.style.overflow='';
+      const opener=state.opener;
+      state.active=null;state.opener=null;
+      if(opener){const row=opener.dataset.row,kind=opener.dataset.kind;const updated=el('rows').querySelector(`[data-row="${row}"][data-kind="${kind}"]`);(updated||opener).focus();}
+    }
+    function choose(id){
+      if(!state.active)return;
+      const {rowIndex,kind}=state.active;
+      if(id){
+        const already=state.rows.findIndex((r,i)=>i!==rowIndex&&r[kind]===id);
+        if(already!==-1)state.rows[already][kind]=null; // Move an already-selected choice, don't duplicate it.
+      }
+      state.rows[rowIndex][kind]=id||null;
+      state.result='idle';state.rowResults=[];
+      render();closeChoice();
+    }
+    function check(){
+      state.rowResults=state.rows.map(r=>!r.score||!r.risk?'missing':correctPairs[r.score]===r.risk?'correct':'wrong');
+      state.result=state.rowResults.every(r=>r==='correct')?'success':'error';
+      render();
+      if(state.result==='success')el('finish').focus();
+    }
+    function reset(){
+      if(window.parent!==window)window.parent.postMessage({type:'norton-question-reset'},'*');
+      state.rows=Array.from({length:3},()=>({score:null,risk:null}));
+      state.result='idle';state.rowResults=[];state.active=null;state.opener=null;
+      state.order.score=shuffle(options.score).map(i=>i.id);
+      state.order.risk=shuffle(options.risk).map(i=>i.id);
+      el('choice-overlay').hidden=true;el('completion-overlay').hidden=true;
+      document.body.style.overflow='';render();
+    }
+    function finish(){
+      if(state.result!=='success')return;
+      el('completion-overlay').hidden=false;
+      document.body.style.overflow='hidden';
+      el('replay').focus();
+      const detail={type:'norton-question-completed',completed:true,score:100,maxScore:100};
+      window.dispatchEvent(new CustomEvent('norton-question-completed',{detail}));
+      if(window.parent!==window)window.parent.postMessage(detail,'*');
+    }
+    el('rows').addEventListener('click',event=>{
+      const target=event.target.closest('.select-cell');
+      if(target)openChoice(Number(target.dataset.row),target.dataset.kind,target);
+    });
+    el('options').addEventListener('click',event=>{
+      const button=event.target.closest('[data-option]');
+      if(button)choose(button.dataset.option);
+    });
+    el('close-choice').addEventListener('click',closeChoice);
+    el('choice-overlay').addEventListener('click',event=>{if(event.target===el('choice-overlay'))closeChoice();});
+    el('choice-overlay').addEventListener('keydown',event=>{
+      if(event.key==='Tab'){
+        const focusable=[...el('choice-overlay').querySelectorAll('button:not([disabled])')];
+        if(!focusable.length)return;
+        if(event.shiftKey&&document.activeElement===focusable[0]){event.preventDefault();focusable[focusable.length-1].focus();}
+        else if(!event.shiftKey&&document.activeElement===focusable[focusable.length-1]){event.preventDefault();focusable[0].focus();}
+      }
+    });
+    document.addEventListener('keydown',event=>{
+      if(event.key==='Escape'&&!el('choice-overlay').hidden)closeChoice();
+    });
+    el('check').addEventListener('click',check);
+    el('reset').addEventListener('click',reset);
+    el('finish').addEventListener('click',finish);
+    el('replay').addEventListener('click',()=>{reset();el('check').focus();});
+    el('continue-course').addEventListener('click',()=>{
+      if(window.parent!==window)window.parent.postMessage({type:'norton-question-continue'},'*');
+    });
+    reset();
+  </script>
+</body>
+</html>
