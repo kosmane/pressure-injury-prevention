@@ -1,0 +1,566 @@
+{
+  "hosp_corridor": {
+    "path": "scenes/01-introduction/assets/hosp_corridor.png",
+    "outputFilename": "hosp_corridor.png",
+    "sourceIds": [
+      "S001"
+    ]
+  },
+  "nurse_bedside": {
+    "path": "scenes/01-introduction/assets/nurse_bedside.png",
+    "outputFilename": "nurse_bedside.png",
+    "sourceIds": [
+      "S002"
+    ]
+  },
+  "nurse_skin_check": {
+    "path": "scenes/01-introduction/assets/nurse_skin_check.png",
+    "outputFilename": "nurse_skin_check.png",
+    "sourceIds": [
+      "S003"
+    ]
+  },
+  "opening_three_steps": {
+    "path": "scenes/01-introduction/assets/opening_three_steps.png",
+    "outputFilename": "opening_three_steps.png",
+    "sourceIds": [
+      "S004"
+    ]
+  },
+  "supine_patient": {
+    "path": "scenes/02-mechanism/assets/supine_patient.png",
+    "outputFilename": "supine_patient.png",
+    "sourceIds": [
+      "S005"
+    ]
+  },
+  "skin_cross_section": {
+    "path": "scenes/02-mechanism/assets/skin_cross_section.png",
+    "outputFilename": "skin_cross_section.png",
+    "sourceIds": [
+      "S006"
+    ]
+  },
+  "pressure_section": {
+    "path": "scenes/02-mechanism/assets/pressure_section.png",
+    "outputFilename": "pressure_section.png",
+    "sourceIds": [
+      "S007",
+      "S010"
+    ]
+  },
+  "vessel_compression": {
+    "path": "scenes/02-mechanism/assets/vessel_compression.png",
+    "outputFilename": "vessel_compression.png",
+    "sourceIds": [
+      "S008"
+    ]
+  },
+  "shear_section": {
+    "path": "scenes/02-mechanism/assets/shear_section.png",
+    "outputFilename": "shear_section.png",
+    "sourceIds": [
+      "S009"
+    ]
+  },
+  "deep_tissue": {
+    "path": "scenes/02-mechanism/assets/deep_tissue.png",
+    "outputFilename": "deep_tissue.png",
+    "sourceIds": [
+      "S011"
+    ]
+  },
+  "stage1_photo": {
+    "path": "scenes/03-classification/assets/stage1_photo.png",
+    "outputFilename": "stage1_photo.png",
+    "sourceIds": [
+      "S012"
+    ]
+  },
+  "stage1_dark_skin": {
+    "path": "scenes/03-classification/assets/stage1_dark_skin.png",
+    "outputFilename": "stage1_dark_skin.png",
+    "sourceIds": [
+      "S013"
+    ]
+  },
+  "stage1_nurse": {
+    "path": "scenes/03-classification/assets/stage1_nurse.png",
+    "outputFilename": "stage1_nurse.png",
+    "sourceIds": [
+      "S014"
+    ]
+  },
+  "stage2_shallow": {
+    "path": "scenes/03-classification/assets/stage2_shallow.png",
+    "outputFilename": "stage2_shallow.png",
+    "sourceIds": [
+      "S015"
+    ]
+  },
+  "stage2_blister": {
+    "path": "scenes/03-classification/assets/stage2_blister.png",
+    "outputFilename": "stage2_blister.png",
+    "sourceIds": [
+      "S016"
+    ]
+  },
+  "stage2_differential": {
+    "path": "scenes/03-classification/assets/stage2_differential.png",
+    "outputFilename": "stage2_differential.png",
+    "sourceIds": [
+      "S017"
+    ]
+  },
+  "stage3_diagram": {
+    "path": "scenes/03-classification/assets/stage3_diagram.png",
+    "outputFilename": "stage3_diagram.png",
+    "sourceIds": [
+      "S018"
+    ]
+  },
+  "stage3_photo": {
+    "path": "scenes/03-classification/assets/stage3_photo.png",
+    "outputFilename": "stage3_photo.png",
+    "sourceIds": [
+      "S019"
+    ]
+  },
+  "stage3_no_muscle": {
+    "path": "scenes/03-classification/assets/stage3_no_muscle.png",
+    "outputFilename": "stage3_no_muscle.png",
+    "sourceIds": [
+      "S020"
+    ]
+  },
+  "stage3_assessment": {
+    "path": "scenes/03-classification/assets/stage3_assessment.png",
+    "outputFilename": "stage3_assessment.png",
+    "sourceIds": [
+      "S021"
+    ]
+  },
+  "stage4_diagram": {
+    "path": "scenes/03-classification/assets/stage4_diagram.png",
+    "outputFilename": "stage4_diagram.png",
+    "sourceIds": [
+      "S022"
+    ]
+  },
+  "stage4_photo": {
+    "path": "scenes/03-classification/assets/stage4_photo.png",
+    "outputFilename": "stage4_photo.png",
+    "sourceIds": [
+      "S023"
+    ]
+  },
+  "stage4_tunneling": {
+    "path": "scenes/03-classification/assets/stage4_tunneling.png",
+    "outputFilename": "stage4_tunneling.png",
+    "sourceIds": [
+      "S024"
+    ]
+  },
+  "unstageable_diagram": {
+    "path": "scenes/03-classification/assets/unstageable_diagram.png",
+    "outputFilename": "unstageable_diagram.png",
+    "sourceIds": [
+      "S025"
+    ]
+  },
+  "unstageable_photo": {
+    "path": "scenes/03-classification/assets/unstageable_photo.png",
+    "outputFilename": "unstageable_photo.png",
+    "sourceIds": [
+      "S026"
+    ]
+  },
+  "unstageable_depth": {
+    "path": "scenes/03-classification/assets/unstageable_depth.png",
+    "outputFilename": "unstageable_depth.png",
+    "sourceIds": [
+      "S027"
+    ]
+  },
+  "unstageable_review": {
+    "path": "scenes/03-classification/assets/unstageable_review.png",
+    "outputFilename": "unstageable_review.png",
+    "sourceIds": [
+      "S028",
+      "S029"
+    ]
+  },
+  "dti_photo": {
+    "path": "scenes/03-classification/assets/dti_photo.png",
+    "outputFilename": "dti_photo.png",
+    "sourceIds": [
+      "S030"
+    ]
+  },
+  "dti_blood_blister": {
+    "path": "scenes/03-classification/assets/dti_blood_blister.png",
+    "outputFilename": "dti_blood_blister.png",
+    "sourceIds": [
+      "S031"
+    ]
+  },
+  "dti_cross_section": {
+    "path": "scenes/03-classification/assets/dti_cross_section.png",
+    "outputFilename": "dti_cross_section.png",
+    "sourceIds": [
+      "S032"
+    ]
+  },
+  "dti_offload": {
+    "path": "scenes/03-classification/assets/dti_offload.png",
+    "outputFilename": "dti_offload.png",
+    "sourceIds": [
+      "S033"
+    ]
+  },
+  "dti_vs_unstageable": {
+    "path": "scenes/03-classification/assets/dti_vs_unstageable.png",
+    "outputFilename": "dti_vs_unstageable.png",
+    "sourceIds": [
+      "S034"
+    ]
+  },
+  "risk_admission": {
+    "path": "scenes/04-prevention/assets/risk_admission.png",
+    "outputFilename": "risk_admission.png",
+    "sourceIds": [
+      "S035"
+    ]
+  },
+  "risk_factors": {
+    "path": "scenes/04-prevention/assets/risk_factors.png",
+    "outputFilename": "risk_factors.png",
+    "sourceIds": [
+      "S036"
+    ]
+  },
+  "braden_screen": {
+    "path": "scenes/04-prevention/assets/braden_screen.png",
+    "outputFilename": "braden_screen.png",
+    "sourceIds": [
+      "S037"
+    ]
+  },
+  "skin_full_assessment": {
+    "path": "scenes/04-prevention/assets/skin_full_assessment.png",
+    "outputFilename": "skin_full_assessment.png",
+    "sourceIds": [
+      "S038"
+    ]
+  },
+  "pressure_points_chart": {
+    "path": "scenes/04-prevention/assets/pressure_points_chart.png",
+    "outputFilename": "pressure_points_chart.png",
+    "sourceIds": [
+      "S039"
+    ]
+  },
+  "skin_documentation": {
+    "path": "scenes/04-prevention/assets/skin_documentation.png",
+    "outputFilename": "skin_documentation.png",
+    "sourceIds": [
+      "S040"
+    ]
+  },
+  "turning_two_nurses": {
+    "path": "scenes/04-prevention/assets/turning_two_nurses.png",
+    "outputFilename": "turning_two_nurses.png",
+    "sourceIds": [
+      "S041"
+    ]
+  },
+  "side_position_support": {
+    "path": "scenes/04-prevention/assets/side_position_support.png",
+    "outputFilename": "side_position_support.png",
+    "sourceIds": [
+      "S042"
+    ]
+  },
+  "turning_schedule": {
+    "path": "scenes/04-prevention/assets/turning_schedule.png",
+    "outputFilename": "turning_schedule.png",
+    "sourceIds": [
+      "S043"
+    ]
+  },
+  "slide_sheet": {
+    "path": "scenes/04-prevention/assets/slide_sheet.png",
+    "outputFilename": "slide_sheet.png",
+    "sourceIds": [
+      "S044"
+    ]
+  },
+  "heels_risk": {
+    "path": "scenes/04-prevention/assets/heels_risk.png",
+    "outputFilename": "heels_risk.png",
+    "sourceIds": [
+      "S045"
+    ]
+  },
+  "heels_float_closeup": {
+    "path": "scenes/04-prevention/assets/heels_float_closeup.png",
+    "outputFilename": "heels_float_closeup.png",
+    "sourceIds": [
+      "S046"
+    ]
+  },
+  "heel_check": {
+    "path": "scenes/04-prevention/assets/heel_check.png",
+    "outputFilename": "heel_check.png",
+    "sourceIds": [
+      "S047"
+    ]
+  },
+  "support_surface": {
+    "path": "scenes/04-prevention/assets/support_surface.png",
+    "outputFilename": "support_surface.png",
+    "sourceIds": [
+      "S048"
+    ]
+  },
+  "support_surface_choice": {
+    "path": "scenes/04-prevention/assets/support_surface_choice.png",
+    "outputFilename": "support_surface_choice.png",
+    "sourceIds": [
+      "S049"
+    ]
+  },
+  "mattress_with_turning": {
+    "path": "scenes/04-prevention/assets/mattress_with_turning.png",
+    "outputFilename": "mattress_with_turning.png",
+    "sourceIds": [
+      "S050"
+    ]
+  },
+  "moisture_care": {
+    "path": "scenes/04-prevention/assets/moisture_care.png",
+    "outputFilename": "moisture_care.png",
+    "sourceIds": [
+      "S051"
+    ]
+  },
+  "skin_barrier": {
+    "path": "scenes/04-prevention/assets/skin_barrier.png",
+    "outputFilename": "skin_barrier.png",
+    "sourceIds": [
+      "S052"
+    ]
+  },
+  "dietitian_review": {
+    "path": "scenes/04-prevention/assets/dietitian_review.png",
+    "outputFilename": "dietitian_review.png",
+    "sourceIds": [
+      "S053"
+    ]
+  },
+  "team_prevention": {
+    "path": "scenes/04-prevention/assets/team_prevention.png",
+    "outputFilename": "team_prevention.png",
+    "sourceIds": [
+      "S054"
+    ]
+  },
+  "oxygen_mask_patient": {
+    "path": "scenes/05-device-injuries/assets/oxygen_mask_patient.png",
+    "outputFilename": "oxygen_mask_patient.png",
+    "sourceIds": [
+      "S055"
+    ]
+  },
+  "nasal_bridge_pressure": {
+    "path": "scenes/05-device-injuries/assets/nasal_bridge_pressure.png",
+    "outputFilename": "nasal_bridge_pressure.png",
+    "sourceIds": [
+      "S056"
+    ]
+  },
+  "under_mask_check": {
+    "path": "scenes/05-device-injuries/assets/under_mask_check.png",
+    "outputFilename": "under_mask_check.png",
+    "sourceIds": [
+      "S057"
+    ]
+  },
+  "device_padding": {
+    "path": "scenes/05-device-injuries/assets/device_padding.png",
+    "outputFilename": "device_padding.png",
+    "sourceIds": [
+      "S058"
+    ]
+  },
+  "device_safety": {
+    "path": "scenes/05-device-injuries/assets/device_safety.png",
+    "outputFilename": "device_safety.png",
+    "sourceIds": [
+      "S059"
+    ]
+  },
+  "mucosal_device": {
+    "path": "scenes/05-device-injuries/assets/mucosal_device.png",
+    "outputFilename": "mucosal_device.png",
+    "sourceIds": [
+      "S060"
+    ]
+  },
+  "offload_first": {
+    "path": "scenes/06-treatment-documentation/assets/offload_first.png",
+    "outputFilename": "offload_first.png",
+    "sourceIds": [
+      "S061"
+    ]
+  },
+  "wound_comprehensive_assessment": {
+    "path": "scenes/06-treatment-documentation/assets/wound_comprehensive_assessment.png",
+    "outputFilename": "wound_comprehensive_assessment.png",
+    "sourceIds": [
+      "S062"
+    ]
+  },
+  "nurse_grade1_2": {
+    "path": "scenes/06-treatment-documentation/assets/nurse_grade1_2.png",
+    "outputFilename": "nurse_grade1_2.png",
+    "sourceIds": [
+      "S063"
+    ]
+  },
+  "care_plan_followup": {
+    "path": "scenes/06-treatment-documentation/assets/care_plan_followup.png",
+    "outputFilename": "care_plan_followup.png",
+    "sourceIds": [
+      "S064"
+    ]
+  },
+  "wound_nurse_consult": {
+    "path": "scenes/06-treatment-documentation/assets/wound_nurse_consult.png",
+    "outputFilename": "wound_nurse_consult.png",
+    "sourceIds": [
+      "S065"
+    ]
+  },
+  "consult_staging_cards": {
+    "path": "scenes/06-treatment-documentation/assets/consult_staging_cards.png",
+    "outputFilename": "consult_staging_cards.png",
+    "sourceIds": [
+      "S066"
+    ]
+  },
+  "advanced_wound_assessment": {
+    "path": "scenes/06-treatment-documentation/assets/advanced_wound_assessment.png",
+    "outputFilename": "advanced_wound_assessment.png",
+    "sourceIds": [
+      "S067"
+    ]
+  },
+  "care_team_meeting": {
+    "path": "scenes/06-treatment-documentation/assets/care_team_meeting.png",
+    "outputFilename": "care_team_meeting.png",
+    "sourceIds": [
+      "S068"
+    ]
+  },
+  "nurse_document": {
+    "path": "scenes/06-treatment-documentation/assets/nurse_document.png",
+    "outputFilename": "nurse_document.png",
+    "sourceIds": [
+      "S069"
+    ]
+  },
+  "documentation_fields": {
+    "path": "scenes/06-treatment-documentation/assets/documentation_fields.png",
+    "outputFilename": "documentation_fields.png",
+    "sourceIds": [
+      "S070"
+    ]
+  },
+  "secure_wound_photo": {
+    "path": "scenes/06-treatment-documentation/assets/secure_wound_photo.png",
+    "outputFilename": "secure_wound_photo.png",
+    "sourceIds": [
+      "S071"
+    ]
+  },
+  "incident_reporting": {
+    "path": "scenes/06-treatment-documentation/assets/incident_reporting.png",
+    "outputFilename": "incident_reporting.png",
+    "sourceIds": [
+      "S072",
+      "S073"
+    ]
+  },
+  "quiz1_redness": {
+    "path": "scenes/07-cases-ending/assets/quiz1_redness.png",
+    "outputFilename": "quiz1_redness.png",
+    "sourceIds": [
+      "S074"
+    ]
+  },
+  "quiz1_question": {
+    "path": "scenes/07-cases-ending/assets/quiz1_question.png",
+    "outputFilename": "quiz1_question.png",
+    "sourceIds": [
+      "S075",
+      "S076"
+    ]
+  },
+  "quiz2_mask": {
+    "path": "scenes/07-cases-ending/assets/quiz2_mask.png",
+    "outputFilename": "quiz2_mask.png",
+    "sourceIds": [
+      "S077"
+    ]
+  },
+  "quiz2_question": {
+    "path": "scenes/07-cases-ending/assets/quiz2_question.png",
+    "outputFilename": "quiz2_question.png",
+    "sourceIds": [
+      "S078",
+      "S079"
+    ]
+  },
+  "quiz3_fat_tissue": {
+    "path": "scenes/07-cases-ending/assets/quiz3_fat_tissue.png",
+    "outputFilename": "quiz3_fat_tissue.png",
+    "sourceIds": [
+      "S080"
+    ]
+  },
+  "quiz3_question": {
+    "path": "scenes/07-cases-ending/assets/quiz3_question.png",
+    "outputFilename": "quiz3_question.png",
+    "sourceIds": [
+      "S081",
+      "S082"
+    ]
+  },
+  "closing_team": {
+    "path": "shared/closing-team.png",
+    "outputFilename": "closing-team.png",
+    "sourceIds": []
+  },
+  "final_care_infographic": {
+    "path": "scenes/07-cases-ending/assets/final-care-infographic.svg",
+    "outputFilename": "final-care-infographic.svg",
+    "sourceIds": [
+      "S083"
+    ]
+  },
+  "norton_scale_infographic": {
+    "path": "shared/norton-scale-infographic.png",
+    "outputFilename": "norton-scale-infographic.png",
+    "sourceIds": [
+      "S088"
+    ]
+  },
+  "pressure_injury_stages_infographic": {
+    "path": "shared/pressure-injury-stages-infographic.png",
+    "outputFilename": "pressure-injury-stages-infographic.png",
+    "sourceIds": [
+      "S089"
+    ]
+  }
+}

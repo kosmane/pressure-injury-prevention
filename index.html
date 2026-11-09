@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#0b2738">
+  <title>לומדת פגיעות לחץ | המרכז הרפואי שמיר</title>
+  <link rel="stylesheet" href="styles/course.css">
+  <script defer src="src/course-data.js"></script>
+  <script defer src="src/scene-player.js"></script>
+  <script defer src="src/cases.js"></script>
+  <script defer src="src/scorm-api.js"></script>
+  <script defer src="src/app.js"></script>
+</head>
+<body>
+  <main class="app-shell" aria-label="לומדת פגיעות לחץ">
+    <section id="credit-screen" class="credit-screen" aria-labelledby="course-title">
+      <img class="brand-logo" src="shared/logo-assaf-harofeh.png" alt="המרכז הרפואי שמיר — אסף הרופא">
+      <img class="opening-illustration" src="shared/opening-purpose.png" alt="אחות מעריכה מטופל מכוסה ומסייעת במניעת פגיעת לחץ">
+      <div class="credit-content">
+        <p class="eyebrow">הדרכה לצוותים רפואיים</p>
+        <h1 id="course-title">פגיעות לחץ</h1>
+        <p class="course-subtitle">לזהות · למנוע · לטפל</p>
+        <div class="credits">
+          <p>תוכן מקצועי: גב' ניקה גורקליאנסקי — <strong><em>מומחית קלינית בפצע סטומה ואי שליטה ומתאמת תחום פצעים</em></strong> במרכז הרפואי שמיר</p>
+          <p>יוצר הלומדה: מגר' אליהו קוסמן, רוקח במרכז הרפואי שמיר</p>
+        </div>
+        <button id="start-course" class="primary-button" type="button">התחלת הלומדה</button>
+      </div>
+      <p class="credit-footer">המרכז הרפואי שמיר (אסף הרופא)</p>
+    </section>
+
+    <section id="course-screen" class="course-screen" hidden aria-label="תוכן הלומדה">
+      <header class="top-bar">
+        <img class="brand-logo" src="shared/logo-assaf-harofeh.png" alt="המרכז הרפואי שמיר — אסף הרופא">
+        <div class="course-heading">
+          <p id="scene-progress" class="scene-progress"></p>
+          <h1 id="scene-title"></h1>
+        </div>
+        <div class="playback-controls" aria-label="בקרת צפייה">
+          <div class="speed-controls" role="group" aria-label="מהירות הצגת השוטים">
+            <button type="button" data-speed="1" aria-pressed="true">1×</button>
+            <button type="button" data-speed="1.5" aria-pressed="false">1.5×</button>
+            <button type="button" data-speed="2" aria-pressed="false">2×</button>
+          </div>
+          <button id="home-button" class="utility-button" type="button">מסך ראשי</button>
+        </div>
+      </header>
+
+      <section id="stage" class="stage" aria-live="polite" aria-atomic="true">
+        <img id="shot-image" class="shot-image" alt="" hidden>
+        <iframe id="norton-frame" class="norton-frame" title="תרגול התאמת מדד Norton" hidden></iframe>
+        <iframe id="pressure-frame" class="norton-frame" title="תרגול התאמת דרגת פגיעת הלחץ" hidden></iframe>
+        <div id="image-placeholder" class="image-placeholder" hidden aria-hidden="true">
+          <span class="placeholder-mark">✦</span>
+          <span>המחשה חזותית</span>
+        </div>
+        <div class="stage-shade" aria-hidden="true"></div>
+        <div id="text-overlays" class="text-overlays">
+          <div id="caption" class="caption" hidden></div>
+          <div id="narration" class="narration" hidden></div>
+        </div>
+        <div id="reflection" class="reflection" hidden>
+          <p id="reflection-question"></p>
+          <p class="reflection-hint">בחרו תשובה אחת. כדי להמשיך צריך לענות נכון.</p>
+          <div id="case-options" class="case-options" role="group" aria-label="אפשרויות תשובה"></div>
+          <p id="case-feedback" class="case-feedback" aria-live="polite"></p>
+          <button id="reveal-answer" class="primary-button" type="button" disabled>בדיקת תשובה</button>
+        </div>
+        <div id="shot-label" class="shot-label"></div>
+        <div id="shot-time" class="shot-time" aria-hidden="true"></div>
+      </section>
+
+      <footer class="bottom-bar">
+        <div id="scene-progress-bar" class="scene-progress-bar" role="progressbar" aria-label="התקדמות בסצנה" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><span id="scene-progress-fill"></span></div>
+        <div id="shot-navigation" class="shot-navigation" role="group" aria-label="ניווט בין שוטים" hidden>
+          <button id="previous-shot" class="utility-button" type="button">אחורה</button>
+          <button id="pause-button" class="utility-button" type="button" aria-pressed="false">עצירה</button>
+          <button id="read-confirmation" class="utility-button" type="button" hidden>אישור קריאה</button>
+          <button id="next-shot" class="primary-button" type="button">המשך</button>
+        </div>
+        <p id="voice-status" class="text-only-note" aria-live="polite">הקריינות מתנגנת; כפתור ההמשך יופעל בסיומה</p>
+        <button id="next-scene" class="primary-button next-button" type="button" hidden>מעבר לפרק הבא</button>
+        <button id="restart-course" class="text-button" type="button" hidden>התחלה מחדש</button>
+      </footer>
+    </section>
+  </main>
+  <div id="orientation-hint" class="orientation-hint" role="status" aria-live="polite" hidden>
+    <span class="orientation-hint-icon" aria-hidden="true">↻</span>
+    <strong>סובבו את הטלפון לרוחב</strong>
+    <span>הלומדה תתאים את עצמה למסך הרחב.</span>
+  </div>
+  <audio id="voice-audio" preload="auto"></audio>
+  <noscript>כדי להפעיל את הלומדה יש לאפשר JavaScript בדפדפן.</noscript>
+</body>
+</html>
+
+
