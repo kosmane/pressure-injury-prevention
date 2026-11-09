@@ -1,7 +1,0 @@
-Use case: scientific-educational
-Asset ID: shear_section
-Primary request (authoritative shot content): חתך רקמות בשכיבה עם ראש מיטה מוגבה וגלישה יחסית של רקמות, שכבות עור נשארות במגע עם המזרן והשלד נע מטה, בלי עיוות אנטומי
-Style/medium: Precise scientific-educational medical anatomy illustration, coherent layered structure, clean boundaries, realistic anatomical relationships; not a clinical patient photograph.
-Composition/framing: wide horizontal 16:9, 1920x1080 target framing, clear single educational focal subject, generous clean bottom safe space for separately added subtitles. 
-Lighting/palette: soft even clinical lighting, neutral pale blue/teal hospital atmosphere, anatomy colors clinically restrained.
-Constraints: no embedded text, letters, labels, numbers, captions, logo, watermark, arrows, circles, identifiers or invented scale readings. Any computer or form is blank schematic fields without text. No gratuitous blood or gore, no extra fingers or anatomical distortions. No added objects or concepts beyond shot content.

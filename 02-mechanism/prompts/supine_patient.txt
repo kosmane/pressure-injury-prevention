@@ -1,6 +1,0 @@
-Use case: scientific-educational
-Asset ID: supine_patient
-Primary request: Wide isometric photographic view of a fictional older adult lying supine on a hospital mattress. The patient wears a hospital gown and is fully covered neck-to-feet by a pale-blue blanket, with no skin examination or skin exposure. Head outside frame for anonymity. Gently brighter illumination on the blanket over the sacral location suggests the region of interest; no markers.
-Style: high-fidelity clinical education hospital still. Credible mattress, natural body proportions, contemporary Israeli hospital, soft even pale-blue/teal light.
-Composition: 16:9 horizontal, 1920x1080 target framing, wide bottom caption safe space.
-Constraints: no text, letters, logos, arrows, circles, identifiers, watermark, wounds or gore. Fully covered patient throughout.
