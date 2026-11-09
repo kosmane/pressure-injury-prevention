@@ -1,0 +1,8 @@
+Use case: photorealistic-natural
+Asset type: reusable scene-transition background for a Hebrew hospital nursing course
+Primary request: a warm, fictional nurse smiling and inviting learners to continue to the next topic
+Scene/backdrop: bright, contemporary hospital education corridor, calm and uncluttered
+Subject: one adult female nurse in modest teal clinical scrubs, fictional and non-identifiable
+Composition/framing: wide 16:9 medium shot; nurse on right third, facing viewer with a natural open-hand welcoming gesture toward open space on the left; keep lower edge calm for course controls
+Lighting/mood: soft daylight, warm, reassuring, professional
+Constraints: no patients, no wounds, no logos, no readable badge text, no embedded text, no watermark or graphics
