@@ -1,0 +1,7 @@
+Use case: scientific-educational
+Asset type: nurse_skin_check, hospital nurse training still.
+Primary request: Respectful routine medical skin assessment: a professional nurse in teal scrubs and examination gloves gently checks a small visible patch of normal lower-back skin immediately above the sacrum of an older adult side-lying on a hospital bed. Clinical sheet covers the patient throughout, with only the small examination window visible. Side view without the patient's face, nurse seen from behind/side without identifiable facial features. Fictional adults.
+Style/medium: high fidelity photographic clinical education.
+Composition: wide 16:9 horizontal, 1920x1080 target framing. Clear focal area at nurse hands checking skin, natural anatomy and normal hand proportions. Keep uncluttered bottom safe space for subtitles.
+Setting and light: contemporary Israeli general-hospital room, privacy curtain, credible equipment, soft even light, neutral pale blue and teal.
+Constraints: no embedded text, letters, labels, logos, watermarks, arrows, circles, patient identifiers, wounds, blood or gore. Appropriate clinical privacy and modest draping.

@@ -1,0 +1,8 @@
+Use case: scientific-educational
+Asset type: introduction course still, nurse_bedside
+Primary request: A registered nurse beside an older adult patient lying on their back in a hospital bed, gentle friendly communication, a partly closed privacy curtain, medium close-up. Generic fictional adults with no identifiable faces: frame from behind the nurse's shoulder, patient's head turned away with facial detail outside the frame.
+Scene/backdrop: Contemporary Israeli general-hospital room with credible bed and equipment.
+Style/medium: high-fidelity photographic clinical educational still.
+Composition/framing: Horizontal 16:9, 1920x1080 target framing, clear single focal subject, natural human proportions. Ample uncluttered bottom safe space for captions.
+Lighting/mood: soft even lighting, neutral pale blue/teal clinical palette, calm reassuring professionalism.
+Constraints: no embedded words, letters, captions, logos, watermarks, arrows, circles, illegible UI text, identifiable patient details, extra fingers, unrealistic wounds, unnecessary gore. Keep stable for 5–10 second hold, no animation.

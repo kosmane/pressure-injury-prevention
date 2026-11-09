@@ -1,0 +1,8 @@
+Use case: scientific-educational
+Asset type: introduction course still, opening_three_steps
+Primary request: Professional nurse stands beside a patient's bed, focused on performing a routine nursing assessment. Nurse and bed on the RIGHT of the frame; keep the LEFT half clean and empty to add three words later in HTML. No words in this image. Nurse seen from behind at three-quarter angle; patient's head outside frame. Generic fictional adults, no identifiable faces or patient information, natural human proportions.
+Scene/backdrop: contemporary Israeli general-hospital room, credible hospital bed, patient modestly covered.
+Style/medium: high-fidelity photographic clinical educational still.
+Composition/framing: wide 16:9 horizontal, target 1920x1080, clear single focal subject on right, spacious pale-blue wall and soft unfocused clinical background on left, ample clean bottom safe space for subtitles. Stable 5–10 second image.
+Lighting/mood: soft even lighting, neutral pale blue/teal clinical palette, calm professional feeling.
+Constraints: no embedded words, letters, captions, logos, watermarks, arrows, circles, illegible UI text, patient identifiers, extra fingers, unrealistic wounds or unnecessary gore.

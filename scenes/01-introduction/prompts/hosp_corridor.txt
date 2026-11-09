@@ -1,0 +1,6 @@
+Use case: scientific-educational
+Asset type: introduction course still, hosp_corridor
+Primary request: Photographic eye-level wide view of a contemporary Israeli general-hospital corridor, an open inpatient-room door, one nurse in teal scrubs entering the room, seen from behind so face is not identifiable.
+Composition/framing: Horizontal 16:9, 1920x1080 target, credible hospital layout, clear single focal subject. Reserve clean uncluttered bottom safe space for captions. Keep essential scene stable for a 5–10 second hold.
+Lighting/mood: soft even natural clinical light, neutral pale blue/teal palette.
+Constraints: fictional adult nurse, natural human proportions, credible equipment, no identifiable details, no embedded words or letters or captions, no logos, watermarks, arrows, circles, illegible UI, extra fingers, gore or invented wounds. No added text.
