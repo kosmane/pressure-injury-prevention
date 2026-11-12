@@ -1,0 +1,7 @@
+Use case: scientific-educational
+Asset ID: unstageable_depth
+Authoritative source content: איור חתך המדגים כיסוי אטום על בסיס פצע שמונע לראות את גבול עומק הפגיעה, רקע ניטרלי
+Primary request: A clean clinical schematic of an unstageable pressure injury. Show a shallow oblique view of the skin opening, with opaque brown-black eschar and yellow-tan slough completely covering the wound base. Crucial clinical constraint: the wound depth is UNKNOWN, so do NOT draw a visible bottom, bottom outline, depth edge, cavity floor, deeper wound wall, exposed fat, muscle or bone beneath the covering. This is NOT a full tissue block with an inferred defect. Use a tightly focused oblique upper-surface view with just a small surrounding rim of intact skin, and fade the obscured central lower area into the neutral pale-blue background without a defined boundary. No invented depth at all.
+Style: restrained scientific-educational schematic medical illustration, clear clean structure, no dramatic lighting.
+Composition: 16:9 horizontal, 1920x1080 target framing, wide clean bottom caption space.
+Constraints: no text, letters, labels, numbers, arrows, circles, logos, watermark, identifiers, blood or unnecessary gore. No cross-sectional depiction of known underlying wound depth.
