@@ -6,11 +6,16 @@
   const scorm = window.SCORMAdapter;
   const cases = window.Cases;
   const STORAGE_KEY = 'pressure-injury-course-progress-v1';
+  const LMS_PENDING_KEY = 'pressure-injury-course-pending-bookmark-v1';
+  const requireScorm = Boolean(document.querySelector('meta[name="scorm-required"]'));
   const $ = (id) => document.getElementById(id);
 
   const creditScreen = $('credit-screen');
   const courseScreen = $('course-screen');
   const startButton = $('start-course');
+  const startError = $('scorm-start-error');
+  const finishError = $('scorm-finish-error');
+  const progressError = $('scorm-progress-error');
   const orientationHint = $('orientation-hint');
   const sceneTitle = $('scene-title');
   const sceneProgress = $('scene-progress');
@@ -61,6 +66,8 @@
   let nortonComplete = false;
   let pressureMatchingComplete = false;
   let readConfirmed = false;
+  let readImageFailed = false;
+  let readCountdownTimer = 0;
   let shotReady = false;
   let restoring = null;
 
@@ -68,8 +75,39 @@
 
   function currentScene() { return course.scenes[sceneIndex]; }
   function currentShot() { return player.getCurrentShot(); }
+  function stopReadCountdown() {
+    clearInterval(readCountdownTimer);
+    readCountdownTimer = 0;
+  }
+  function startReadCountdown(shot) {
+    if (!shot?.requireReadConfirmation) return;
+    const deadline = performance.now() + 3000;
+    const shotId = shot.sourceId;
+    const update = () => {
+      if (courseScreen.hidden || currentShot()?.sourceId !== shotId) {
+        stopReadCountdown();
+        return;
+      }
+      const remaining = Math.max(0, Math.ceil((deadline - performance.now()) / 1000));
+      readConfirmationButton.disabled = remaining > 0;
+      readConfirmationButton.textContent = remaining ? `אישור קריאה (${remaining})` : 'אישור קריאה';
+      if (!remaining) stopReadCountdown();
+    };
+    readCountdownTimer = setInterval(update, 100);
+    update();
+  }
   function isInteractiveShot(shot) {
     return shot?.interactionType === 'norton-matching' || shot?.interactionType === 'pressure-matching';
+  }
+  function titleForShot(scene, shot) {
+    if (scene.sceneNumber !== 7 || !shot) return scene.title;
+    const caseShot = cases?.caseForShot(shot.sourceId);
+    const questions = scene.shots.filter((item) =>
+      cases?.caseForShot(item.sourceId)?.phase === 'reflection' || isInteractiveShot(item));
+    const number = questions.findIndex((item) =>
+      item.sourceId === shot.sourceId ||
+      (caseShot && cases.caseForShot(item.sourceId)?.caseId === caseShot.caseId));
+    return number < 0 ? scene.title : `${scene.title} — שאלה ${number + 1} מתוך ${questions.length}`;
   }
   function setMotionSpeed() {
     stage.style.setProperty('--image-motion-duration', `${0.5 / speed}s`);
@@ -88,15 +126,55 @@
     }
     return result;
   }
+  let confirmedBookmark = null;
+  let pendingBookmark = null;
+  let resumeContext = null;
+
+  function saveLmsBookmark(bookmark) {
+    const saved = scorm.setProgress(bookmark);
+    progressError.hidden = saved;
+    pendingBookmark = saved ? null : bookmark;
+    if (saved) confirmedBookmark = bookmark;
+    try {
+      if (saved) sessionStorage.removeItem(LMS_PENDING_KEY);
+      else if (resumeContext?.learner) {
+        sessionStorage.setItem(LMS_PENDING_KEY, JSON.stringify({
+          learner: resumeContext.learner,
+          confirmed: confirmedBookmark,
+          pending: bookmark
+        }));
+      }
+    } catch (_) { /* Same-tab recovery is optional when storage is disabled. */ }
+    return saved;
+  }
+
+  function lmsProgressToRestore() {
+    const remoteBookmark = scorm.getProgress();
+    resumeContext = scorm.getResumeContext();
+    if (!pendingBookmark) {
+      confirmedBookmark = remoteBookmark;
+      if (resumeContext?.learner && resumeContext.entry === 'resume') {
+        try {
+          const missed = JSON.parse(sessionStorage.getItem(LMS_PENDING_KEY) || 'null');
+          if (missed?.learner === resumeContext.learner && missed.confirmed === remoteBookmark &&
+              progressFromScorm(missed.pending)) pendingBookmark = missed.pending;
+        } catch (_) { /* Use the LMS bookmark when local recovery is unavailable. */ }
+      }
+    }
+    return progressFromScorm(pendingBookmark || remoteBookmark);
+  }
+
   function saveProgress() {
     const state = player.getState();
     if (!state.sceneId) return;
     const progress = state.sceneComplete
       ? { sceneId: state.sceneId, shotId: 'complete', sceneComplete: true }
       : { sceneId: state.sceneId, shotId: state.shotId || null, sceneComplete: false };
-    try { localStorage.setItem(STORAGE_KEY, JSON.stringify(progress)); } catch (_) { /* Local persistence is optional. */ }
     restoring = progress;
-    if (scorm) scorm.setProgress(state.sceneComplete ? `${state.sceneId}:complete` : `${state.sceneId}:${state.shotId || ''}`);
+    if (scorm.isAvailable) saveLmsBookmark(`${progress.sceneId}:${progress.shotId || ''}`);
+    else {
+      try { localStorage.setItem(STORAGE_KEY, JSON.stringify(progress)); } catch (_) { /* Local persistence is optional. */ }
+    }
   }
 
   function validProgress(progress) {
@@ -206,26 +284,44 @@
   }
 
   function setImage(shot) {
-    const asset = shot && registry[shot.assetId];
-    const src = asset && asset.path ? asset.path : '';
-    if (!src) {
+    const src = registry[shot.assetId]?.path;
+    const activeShot = currentShot();
+    const isCurrent = () => !courseScreen.hidden && currentShot() === activeShot;
+    const showImageError = () => {
+      if (!isCurrent()) return;
       shotImage.hidden = true;
-      shotImage.removeAttribute('src');
       placeholder.hidden = false;
+      if (shot.requireReadConfirmation) {
+        stopReadCountdown();
+        readImageFailed = true;
+        readConfirmationButton.textContent = 'טעינת התמונה נכשלה. נסו שוב';
+        readConfirmationButton.disabled = false;
+      }
+    };
+    shotImage.hidden = true;
+    placeholder.hidden = false;
+    if (!src) {
+      shotImage.onload = null;
+      shotImage.onerror = null;
+      shotImage.removeAttribute('src');
+      showImageError();
       return;
     }
-    shotImage.onload = () => { shotImage.hidden = false; placeholder.hidden = true; };
-    shotImage.onerror = () => { shotImage.hidden = true; placeholder.hidden = false; };
+    const expectedSrc = new URL(src, document.baseURI).href;
+    const showImage = () => {
+      if (!isCurrent() || shotImage.currentSrc !== expectedSrc) return;
+      shotImage.onload = null;
+      shotImage.onerror = null;
+      shotImage.hidden = false;
+      placeholder.hidden = true;
+      startReadCountdown(shot);
+    };
+    shotImage.onload = showImage;
+    shotImage.onerror = showImageError;
     shotImage.alt = shot.visual || '';
     restartMotion(shotImage);
     shotImage.src = src;
-    if (shotImage.complete && shotImage.naturalWidth > 0) {
-      shotImage.hidden = false;
-      placeholder.hidden = true;
-    } else {
-      shotImage.hidden = true;
-      placeholder.hidden = false;
-    }
+    if (shotImage.complete && shotImage.naturalWidth > 0) showImage();
   }
 
   function setTransitionImage() {
@@ -244,11 +340,14 @@
   }
 
   function renderShot() {
+    stopReadCountdown();
+    finishError.hidden = true;
     stage.classList.remove('is-closing');
     const scene = currentScene();
     const shot = currentShot();
-    sceneTitle.textContent = scene.title;
+    sceneTitle.textContent = titleForShot(scene, shot);
     sceneProgress.textContent = `פרק ${scene.sceneNumber} מתוך ${course.scenes.length}`;
+    progressBar.hidden = scene.sceneNumber === 7;
     nextButton.hidden = true;
     restartButton.hidden = true;
     reflection.hidden = true;
@@ -259,9 +358,10 @@
     nortonComplete = false;
     pressureMatchingComplete = false;
     readConfirmed = false;
+    readImageFailed = false;
     readConfirmationButton.hidden = !shot?.requireReadConfirmation;
-    readConfirmationButton.disabled = false;
-    readConfirmationButton.textContent = 'אישור קריאה';
+    readConfirmationButton.disabled = !!shot?.requireReadConfirmation;
+    readConfirmationButton.textContent = shot?.requireReadConfirmation ? 'טוען תמונה…' : 'אישור קריאה';
     previousShotButton.hidden = false;
     previousShotButton.textContent = 'אחורה';
     pauseButton.hidden = false;
@@ -273,6 +373,7 @@
     if (caseShot && (caseShot.phase === 'question' || caseShot.phase === 'reflection')) cases.showPrompt(caseShot.caseId);
 
     if (!shot) {
+      if (pendingBookmark) saveLmsBookmark(pendingBookmark);
       showSceneComplete();
       return;
     }
@@ -351,6 +452,7 @@
   }
 
   function showSceneComplete() {
+    stopReadCountdown();
     stopVoice();
     stage.classList.remove('is-reading', 'has-norton-quiz');
     nortonFrame.hidden = true;
@@ -378,8 +480,22 @@
     progressBar.setAttribute('aria-valuenow', '100');
     nextButton.hidden = false;
     nextButton.textContent = lastScene ? 'סיום הלומדה' : 'מעבר לפרק הבא';
-    restartButton.hidden = !lastScene;
-    nextButton.focus({ preventScroll: true });
+    restartButton.hidden = true;
+    if (lastScene) recordCourseCompletion();
+    (nextButton.hidden ? restartButton : nextButton).focus({ preventScroll: true });
+  }
+
+  function recordCourseCompletion() {
+    if (pendingBookmark && !saveLmsBookmark(pendingBookmark)) return;
+    if (!scorm.complete()) {
+      finishError.textContent = 'שמירת ההשלמה במערכת הלמידה נכשלה. לחצו על „סיום הלומדה” כדי לנסות שוב.';
+      finishError.hidden = false;
+      return;
+    }
+    finishError.hidden = true;
+    voiceStatus.textContent = 'הלומדה הושלמה';
+    nextButton.hidden = true;
+    restartButton.hidden = false;
   }
 
   function updateShotNavigation() {
@@ -502,6 +618,7 @@
   }
 
   function returnHome() {
+    stopReadCountdown();
     running = false;
     cancelAnimationFrame(frameHandle);
     stopVoice();
@@ -553,15 +670,20 @@
   }
 
   startButton.addEventListener('click', () => {
+    if (!scorm?.initialize(requireScorm)) {
+      startError.textContent = 'לא ניתן להתחבר למערכת הלמידה. לחצו על „התחלת הלומדה” כדי לנסות שוב.';
+      startError.hidden = false;
+      return;
+    }
+    startError.hidden = true;
     creditScreen.hidden = true;
     courseScreen.hidden = false;
     updateOrientationHint();
     requestLandscapeMode();
-    if (scorm) scorm.initialize();
     let index = 0;
     let shotId;
     const savedProgress = scorm?.isAvailable
-      ? progressFromScorm(scorm.getProgress())
+      ? lmsProgressToRestore()
       : validProgress(restoring);
     if (savedProgress) {
       const found = course.scenes.findIndex((scene) => scene.id === savedProgress.sceneId);
@@ -575,10 +697,15 @@
   document.addEventListener('fullscreenchange', updateOrientationHint);
 
   homeButton.addEventListener('click', returnHome);
+  $('scorm-retry-progress').addEventListener('click', () => {
+    if (pendingBookmark) saveLmsBookmark(pendingBookmark);
+  });
 
   document.querySelectorAll('[data-speed]').forEach((button) => {
     button.addEventListener('click', () => {
       speed = Number(button.dataset.speed) || 1;
+      voiceAudio.defaultPlaybackRate = speed;
+      voiceAudio.playbackRate = speed;
       setMotionSpeed();
       document.querySelectorAll('[data-speed]').forEach((item) => item.setAttribute('aria-pressed', String(item === button)));
     });
@@ -604,7 +731,15 @@
   previousShotButton.addEventListener('click', goToPreviousShot);
   nextShotButton.addEventListener('click', advanceCurrentShot);
   readConfirmationButton.addEventListener('click', () => {
-    if (!currentShot()?.requireReadConfirmation) return;
+    const shot = currentShot();
+    if (!shot?.requireReadConfirmation || readConfirmationButton.disabled) return;
+    if (readImageFailed) {
+      readImageFailed = false;
+      readConfirmationButton.disabled = true;
+      readConfirmationButton.textContent = 'טוען תמונה…';
+      setImage(shot);
+      return;
+    }
     readConfirmed = true;
     readConfirmationButton.disabled = true;
     readConfirmationButton.textContent = 'הקריאה אושרה';
@@ -650,22 +785,26 @@
   nextButton.addEventListener('click', () => {
     if (player.getState().sceneComplete !== true) return;
     if (sceneIndex >= course.scenes.length - 1) {
-      running = false;
-      if (scorm) scorm.complete();
-      nextButton.hidden = true;
-      restartButton.hidden = false;
+      recordCourseCompletion();
       return;
     }
     startScene(sceneIndex + 1);
   });
 
   restartButton.addEventListener('click', () => {
-    try { localStorage.removeItem(STORAGE_KEY); } catch (_) { /* Local persistence is optional. */ }
+    const firstBookmark = `${course.scenes[0].id}:${course.scenes[0].shots[0].sourceId}`;
+    if (scorm.isAvailable && !saveLmsBookmark(firstBookmark)) return;
+    if (!scorm.isAvailable) {
+      try { localStorage.removeItem(STORAGE_KEY); } catch (_) { /* Local persistence is optional. */ }
+    }
     restoring = null;
-    if (scorm) scorm.setProgress(`${course.scenes[0].id}:${course.scenes[0].shots[0].sourceId}`);
     returnHome();
   });
 
-  window.addEventListener('pagehide', () => { if (scorm) scorm.terminate(); });
+  window.addEventListener('pagehide', (event) => {
+    if (pendingBookmark) saveLmsBookmark(pendingBookmark);
+    if (event.persisted) scorm?.saveExitState();
+    else scorm?.terminate();
+  });
 }());
 
