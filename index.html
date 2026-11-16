@@ -26,6 +26,7 @@
           <p>יוצר הלומדה: מגר' אליהו קוסמן, רוקח במרכז הרפואי שמיר</p>
         </div>
         <button id="start-course" class="primary-button" type="button">התחלת הלומדה</button>
+        <p id="scorm-start-error" class="scorm-error" role="alert" hidden></p>
       </div>
       <p class="credit-footer">המרכז הרפואי שמיר (אסף הרופא)</p>
     </section>
@@ -71,6 +72,10 @@
         <div id="shot-time" class="shot-time" aria-hidden="true"></div>
       </section>
 
+      <div id="scorm-progress-error" class="scorm-progress-error" hidden>
+        <p class="scorm-error" role="alert">שמירת ההתקדמות במערכת הלמידה נכשלה. נסו לשמור שוב לפני היציאה.</p>
+        <button id="scorm-retry-progress" class="utility-button" type="button">ניסיון שמירה חוזר</button>
+      </div>
       <footer class="bottom-bar">
         <div id="scene-progress-bar" class="scene-progress-bar" role="progressbar" aria-label="התקדמות בסצנה" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><span id="scene-progress-fill"></span></div>
         <div id="shot-navigation" class="shot-navigation" role="group" aria-label="ניווט בין שוטים" hidden>
@@ -80,6 +85,7 @@
           <button id="next-shot" class="primary-button" type="button">המשך</button>
         </div>
         <p id="voice-status" class="text-only-note" aria-live="polite">הקריינות מתנגנת; כפתור ההמשך יופעל בסיומה</p>
+        <p id="scorm-finish-error" class="scorm-error" role="alert" hidden></p>
         <button id="next-scene" class="primary-button next-button" type="button" hidden>מעבר לפרק הבא</button>
         <button id="restart-course" class="text-button" type="button" hidden>התחלה מחדש</button>
       </footer>
