@@ -46,7 +46,9 @@ button:focus-visible, a:focus-visible { outline: 3px solid #f2c96d; outline-offs
 .primary-button:disabled { opacity: .56; cursor: wait; }
 .credit-footer { position: absolute; bottom: 2.8%; left: 3%; color: rgba(229,241,244,.55); font-size: 12px; }
 
-.course-screen { display: grid; grid-template-rows: auto 1fr auto; background: #092331; }
+.course-screen { display: grid; grid-template-rows: auto minmax(0, 1fr) auto auto; background: #092331; }
+.course-screen > .bottom-bar { grid-row: 4; }
+.scorm-progress-error { grid-row: 3; display: flex; flex-wrap: wrap; align-items: center; gap: .5rem; padding: .5rem 1rem; }
 .top-bar { min-height: 82px; display: flex; align-items: center; gap: 24px; padding: 12px 24px; background: rgba(5,23,34,.96); border-bottom: 1px solid rgba(255,255,255,.1); z-index: 2; direction: ltr; }
 .top-bar .brand-logo { width: clamp(110px, 12vw, 170px); flex: 0 0 auto; }
 .course-heading { flex: 1; min-width: 0; direction: rtl; text-align: right; }
@@ -85,6 +87,8 @@ button:focus-visible, a:focus-visible { outline: 3px solid #f2c96d; outline-offs
 .scene-progress-bar { position: absolute; top: 0; right: 0; left: 0; height: 3px; overflow: hidden; background: rgba(255,255,255,.12); }
 .scene-progress-bar span { display: block; width: 0; height: 100%; background: var(--teal-bright); transition: width .12s linear; }
 .text-only-note { margin: 0; color: #a9c1c9; font-size: 13px; }
+.scorm-error { margin: 0; color: #ffd0c6; font-size: 14px; }
+.credit-content .scorm-error { margin-top: .5rem; }
 .next-button { margin-inline-start: auto; }
 .text-button { border: 0; background: transparent; color: #b8d8de; text-decoration: underline; cursor: pointer; }
 .reflection:not([hidden]) ~ .shot-time { display: none; }
@@ -143,9 +147,13 @@ button:focus-visible, a:focus-visible { outline: 3px solid #f2c96d; outline-offs
   .text-overlays { right: 6%; bottom: 3%; left: 6%; max-height: 42%; gap: 5px; padding: 8px 12px 18px; }
   .caption { font-size: clamp(16px, 3.2vw, 24px); }
   .narration { font-size: clamp(12px, 2.2vw, 17px); line-height: 1.32; }
-  .reflection { max-height: 92%; padding: 12px; }
+  .stage { grid-template-rows: minmax(0, 1fr); }
+  .reflection { display: grid; grid-template-rows: auto auto minmax(0, 1fr) auto auto; max-height: 100%; overflow: hidden; padding: 8px 12px; }
   .reflection > p:first-child { font-size: clamp(18px, 3.2vw, 26px); }
-  .case-options { max-height: 32vh; }
+  .reflection-hint { margin: 4px 0 6px; }
+  .case-options { min-height: 0; max-height: 32vh; margin-bottom: 6px; }
+  .case-feedback { margin-bottom: 4px; }
+  .reflection .primary-button { justify-self: center; }
   .credit-screen > .brand-logo { top: 1.5%; width: 120px; max-height: 12%; padding: 5px 12px; }
   .credit-content { top: 10%; right: 4%; bottom: 4%; width: 58%; padding: 10px 16px; }
   .credit-content h1 { font-size: clamp(28px, 5vh, 46px); }
