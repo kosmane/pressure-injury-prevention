@@ -32,7 +32,7 @@ button:focus-visible, a:focus-visible { outline: 3px solid #f2c96d; outline-offs
 .credit-screen::after { width: 42vw; aspect-ratio: 1; right: -12vw; top: -22vw; }
 .opening-illustration { position: absolute; z-index: 0; inset: 0; width: 100%; height: 100%; object-fit: contain; background: #0b2738; }
 .brand-logo { width: clamp(120px, 15vw, 220px); height: auto; object-fit: contain; }
-.credit-screen > .brand-logo { position: absolute; top: 3.4%; left: 3.2%; z-index: 3; }
+.credit-screen > .brand-logo { position: absolute; top: 1.5%; left: 1.5%; z-index: 3; width: clamp(120px, 18vw, 220px); max-height: 10%; padding: 8px 18px; border-radius: 50%; background: #fff; }
 .credit-content { position: absolute; z-index: 2; top: 14%; right: 3.5%; bottom: 7%; display: flex; width: min(48%, 570px); flex-direction: column; align-items: center; justify-content: center; padding: clamp(16px, 2vw, 30px); border: 1px solid rgba(255,255,255,.16); border-radius: 20px; background: rgba(6,29,42,.88); text-align: center; }
 .eyebrow { margin: 0 0 1.2rem; color: var(--teal-bright); font-size: clamp(14px, 1.4vw, 20px); letter-spacing: .06em; }
 .credit-content h1 { margin: 0; font-size: clamp(38px, 5vw, 68px); font-weight: 700; line-height: 1.12; }
@@ -118,7 +118,7 @@ button:focus-visible, a:focus-visible { outline: 3px solid #f2c96d; outline-offs
   .narration { font-size: clamp(14px, 4vw, 18px); line-height: 1.35; }
   .reflection { width: 94%; padding: 16px 12px; }
   .case-options { max-height: 38vh; }
-  .credit-screen > .brand-logo { top: 2%; width: 98px; }
+  .credit-screen > .brand-logo { top: 1.5%; width: 140px; max-height: 8%; padding: 6px 14px; }
   .opening-home-button { top: 2%; right: 4%; }
   .opening-illustration { inset: 11% 2% auto; width: 96%; height: 39%; }
   .credit-content { top: 48%; right: 4%; bottom: 5%; width: 92%; padding: 12px 16px; }
@@ -146,7 +146,7 @@ button:focus-visible, a:focus-visible { outline: 3px solid #f2c96d; outline-offs
   .reflection { max-height: 92%; padding: 12px; }
   .reflection > p:first-child { font-size: clamp(18px, 3.2vw, 26px); }
   .case-options { max-height: 32vh; }
-  .credit-screen > .brand-logo { top: 2%; width: 80px; }
+  .credit-screen > .brand-logo { top: 1.5%; width: 120px; max-height: 12%; padding: 5px 12px; }
   .credit-content { top: 10%; right: 4%; bottom: 4%; width: 58%; padding: 10px 16px; }
   .credit-content h1 { font-size: clamp(28px, 5vh, 46px); }
   .course-subtitle { margin: .35rem 0 .55rem; font-size: clamp(14px, 2.5vh, 20px); }
